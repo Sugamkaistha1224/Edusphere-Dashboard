@@ -1042,14 +1042,6 @@ function highlightText() {
             <p>Searches</p>
         </span>
     </li>
-    <!-- <li>
-        <i class='bx bx-dollar-circle'></i>
-        <span class="info">
-            <h3>$0,00</h3>
-            <p>Total Sales</p>
-        </span>
-    </li>-->
-    <!-- New Real-Time Clock Insight -->
     <li>
         <i class='bx bx-time'></i>
         <span class="info">
@@ -1058,59 +1050,91 @@ function highlightText() {
         </span>
     </li>
 </ul>
-<!-- End of Insights -->
 
-<!-- JavaScript for live updates -->
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
 <script>
-// Animate counters initially
-function animateCounter(id, target, speed = 50) {
-    const element = document.getElementById(id);
-    let count = 0;
-    const increment = Math.ceil(target / 100); // Smoother steps
-    const update = () => {
-        count += increment;
-        if (count >= target) {
-            count = target;
-            clearInterval(interval);
-        }
-        element.textContent = count.toLocaleString();
-    };
-    const interval = setInterval(update, speed);
+const firebaseConfig = {
+  apiKey: "AIzaSyBI3UEd_tFIeS1r0rAoNFCjj7yO9zfgqkg",
+  authDomain: "edusphere-live.firebaseapp.com",
+  databaseURL: "https://edusphere-live-default-rtdb.firebaseio.com",
+  projectId: "edusphere-live",
+  storageBucket: "edusphere-live.appspot.com",
+  messagingSenderId: "121735962207",
+  appId: "1:121735962207:web:c99d5dba29e98a941e45ea",
+  measurementId: "G-FZ7K5PJB12"
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// 📈 Increase site visit on every page load
+function increaseSiteVisit() {
+    const siteVisitsRef = database.ref('siteVisits');
+    siteVisitsRef.transaction(currentValue => {
+        return (currentValue || 0) + 1;
+    });
 }
 
-// Start counters
-animateCounter('paidOrders', 14);
-animateCounter('siteVisits', 30);
-animateCounter('searches', 21);
+// 📊 Update the site visit number in real time
+function showSiteVisits() {
+    const siteVisitsRef = database.ref('siteVisits');
+    siteVisitsRef.on('value', (snapshot) => {
+        const count = snapshot.val();
+        document.getElementById('siteVisits').textContent = count || 0;
+    });
+}
 
-// Live Clock
-function updateTime() {
+// ✅ Start updating
+increaseSiteVisit();
+showSiteVisits();
+</script>
+
+<script>
+  // LIVE Site Visit Counter
+  const visitRef = database.ref('siteVisits');
+
+  visitRef.transaction(function(currentVisits) {
+    return (currentVisits || 0) + 1;
+  });
+
+  visitRef.on('value', function(snapshot) {
+    const visits = snapshot.val();
+    document.getElementById('siteVisits').textContent = visits || 0;
+  });
+
+  // Paid Orders Counter
+  animateCounter('paidOrders', 14);
+  animateCounter('searches', 21);
+
+  // Clock
+  function updateTime() {
     const now = new Date();
     const timeString = now.toLocaleTimeString();
     document.getElementById('currentTime').textContent = timeString;
-}
-setInterval(updateTime, 1000);
-updateTime(); // Show time immediately
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
 
-// Random Increment Function
-function randomIncrement() {
-    const ids = ['paidOrders', 'siteVisits', 'searches'];
-    const randomId = ids[Math.floor(Math.random() * ids.length)];
-    const element = document.getElementById(randomId);
-    let currentValue = parseInt(element.textContent.replace(/,/g, ''));
-    const randomIncrease = Math.floor(Math.random() * 3) + 1; // +1 to +3
-    currentValue += randomIncrease;
-    element.textContent = currentValue.toLocaleString();
-}
-
-// Every 1–2 minutes, randomly increase
-function startRandomUpdates() {
-    setInterval(() => {
-        randomIncrement();
-    }, Math.floor(Math.random() * 60000) + 60000); // 60s–120s (1–2 min)
-}
-startRandomUpdates();
-
+  // Animate Counter
+  function animateCounter(id, target, speed = 50) {
+    const element = document.getElementById(id);
+    let count = 0;
+    const increment = Math.ceil(target / 100);
+    const interval = setInterval(() => {
+      count += increment;
+      if (count >= target) {
+        count = target;
+        clearInterval(interval);
+      }
+      element.textContent = count.toLocaleString();
+    }, speed);
+  }
 </script>
 
 <style>
