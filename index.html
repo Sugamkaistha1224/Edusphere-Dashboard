@@ -643,12 +643,38 @@ body{
             <div class="logo-name"><span>Edu</span>Sphere</div>
         </a>
         <ul class="side-menu">
-    <li class="active"><a href="#"><i class='bx bxs-dashboard'></i>Dashboard</a></li>
-    <li><a href="#" id="openAttendance"><i class='bx bx-group'></i>Attendance</a></li>
-   <li><a href="#" id="openEdusphereEnv"><i class='bx bx-analyse'></i>Edusphere-Env</a></li>
-   <li><a href="#" id="openStaffLogin"><i class='bx bx-message-square-dots'></i>Staff Login</a></li>
-   <li><a href="#" id="openvirtualzone"><i class='bx bx-analyse'></i>Virtul Zone</a></li>
-    <li><a href="#" id="openServerStatus"><i class='bx bx-server'></i>Server </a></li>
+    <li>
+  <a href="#" id="openTaskManager">
+    <i class='bx bxs-dashboard'></i> Task Manager
+  </a>
+</li>
+
+<script>
+  document.getElementById("openTaskManager").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const url = "https://sugamkaistha1224.github.io/taskmanager/";
+    const width = 1000;
+    const height = 600;
+
+    // Center the popup
+    const left = (window.screen.width / 2) - (width / 2);
+    const top = (window.screen.height / 2) - (height / 2);
+
+    window.open(
+      url,
+      "TaskManagerPopup",
+      `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`
+    );
+  });
+</script>
+    <li><a href="#" id="openAttendance"><i class='bx bx-group'></i> Attendance</a></li>
+      <li><a href="#" id="openOurDoc"><i class='bx bx-cloud'></i>OurDoc Cloud Store</a></li>
+  <li><a href="#" id="openEdusphereEnv"><i class='bx bx-analyse'></i> Edusphere-Env</a></li>
+  <li><a href="#" id="openStaffLogin"><i class='bx bx-message-square-dots'></i> Staff Login</a></li>
+  <li><a href="#" id="openvirtualzone"><i class='bx bx-analyse'></i> Virtul Zone</a></li>
+  <li><a href="#" id="openServerStatus"><i class='bx bx-server'></i> Server</a></li>
+
 </ul>
         <ul class="side-menu">
             <li>
@@ -660,182 +686,50 @@ body{
         </ul>
     </div>
     <!-- End of Sidebar -->
+    <script type="text/javascript">
+
+  function openPopup(url, title, width = 1000, height = 600) {
+    const left = (screen.width - width) / 2;
+    const top = (screen.height - height) / 2;
+    window.open(url, title, `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes`);
+  }
+
+  document.getElementById("openAttendance").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/attendance/", "Attendance");
+  });
+document.getElementById("openOurDoc").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/file/", "OurDocStorage");
+  });
+  document.getElementById("openEdusphereEnv").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/edusphere-enviroments-app/", "EdusphereEnv");
+  });
+
+  document.getElementById("openStaffLogin").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/school-login/", "StaffLogin");
+  });
+
+  document.getElementById("openvirtualzone").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/VirtualZone/", "VirtualZone");
+  });
+
+  document.getElementById("openServerStatus").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/serverstatus/", "ServerStatus");
+  });
+
+  document.getElementById("openOurDoc").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/file/", "OurDocStorage");
+  });
+
+    </script>
 <!-- Attendance Modal -->
-<div id="attendanceModal" class="modal">
-    <div class="modal-content">
-        <span class="close-attendance">&times;</span> <!-- different class -->
-        <iframe id="attendanceFrame" src="https://sugamkaistha1224.github.io/attendance/" width="100%" height="600"></iframe>
-    </div>
-</div>
-<!-- Virtual Mode -->
-<div id="virtualzone" class="modal">
-    <div class="modal-content">
-        <span class="close-virtual">&times;</span> <!-- different class -->
-        <iframe id="virtualFrame" src="https://sugamkaistha1224.github.io/VirtualZone/" width="100%" height="600"></iframe>
-    </div>
-</div>
-<!-- Modal for Edusphere-Env -->
-<div id="edusphereEnvModal" class="modal">
-    <div class="modal-content">
-        <span class="close-edusphere">&times;</span> <!-- Close button -->
-        <iframe id="edusphereEnvFrame" src="https://sugamkaistha1224.github.io/edusphere-enviroments-app/" width="100%" height="600" style="border:none;"></iframe>
-    </div>
-</div>
 
-<style type="text/css">
-    .close-attendance,  .close-staff, .close-edusphere, .close-virtual {
-        position: absolute;
-        top: 1px;
-        right: 25px;
-        font-size: 48px;
-        font-weight: bold;
-        color: black;
-        cursor: pointer;
-    }
-    .close-attendance:hover,  .close-staff:hover, .close-edusphere:hover, .close-virtual:hover {
-        color: #aaa;
-    }
-</style>
-<!-- Staff Login Modal -->
-<div id="staffLoginModal" class="modal">
-    <div class="modal-content">
-        <span class="close-staff">&times;</span>
-        <iframe id="staffLoginFrame" src="https://sugamkaistha1224.github.io/school-login/" width="100%" height="500" style="border:none;"></iframe>
-    </div>
-</div>
-<script>
-     // Virtual mode
-    const openvirtualzone = document.getElementById("openvirtualzone");
-    const virtualzone = document.getElementById("virtualzone");
-    const closevirtual = document.querySelector(".close-virtual");
-
-    openvirtualzone.addEventListener("click", function(event) {
-        event.preventDefault();
-        virtualzone.style.display = "flex";
-    });
-
-    closevirtual.addEventListener("click", function() {
-        virtualzone.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === edusphereEnvModal) {
-            edusphereEnvModal.style.display = "none";
-        }
-    });
-    // Edusphere-Env modal
-    const openEdusphereEnv = document.getElementById("openEdusphereEnv");
-    const edusphereEnvModal = document.getElementById("edusphereEnvModal");
-    const closeEdusphere = document.querySelector(".close-edusphere");
-
-    openEdusphereEnv.addEventListener("click", function(event) {
-        event.preventDefault();
-        edusphereEnvModal.style.display = "flex";
-    });
-
-    closeEdusphere.addEventListener("click", function() {
-        edusphereEnvModal.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === edusphereEnvModal) {
-            edusphereEnvModal.style.display = "none";
-        }
-    });
-    // Staff Login modal
-    const openStaffLogin = document.getElementById("openStaffLogin");
-    const staffLoginModal = document.getElementById("staffLoginModal");
-    const closeStaff = document.querySelector(".close-staff");
-
-    openStaffLogin.addEventListener("click", function(event) {
-        event.preventDefault();
-        staffLoginModal.style.display = "flex";
-    });
-
-    closeStaff.addEventListener("click", function() {
-        staffLoginModal.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === staffLoginModal) {
-            staffLoginModal.style.display = "none";
-        }
-    });
-</script>
-
-<!-- Edusphere Server Status Modal -->
-<style>
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-.modal-content {
-    background: white;
-    margin: 10% auto;
-    padding: 20px;
-    border: 5px solid #888;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 1500px;
-    height: 520px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    overflow: hidden;
-    position: relative;
-}
-
-
-.close-server {
-    position: absolute;
-    top: 1px;
-    right: 25px;
-    font-size: 48px;
-    font-weight: bold;
-     color: #aaa;
-    cursor: pointer;
-}
-
-.close-server:hover {
-   color: black; /* Light blue hover */
-}
-
-
-</style>
-
-<div id="serverStatusModal" class="modal">
-    <div class="modal-content">
-        <span class="close-server">&times;</span>
-        <iframe id="serverStatusFrame" src="https://sugamkaistha1224.github.io/server-status/" width="100%" height="500" style="border:none;"></iframe>
-    </div>
-</div>
-<script>
-    // Edusphere Server modal
-    const openServerStatus = document.getElementById("openServerStatus");
-    const serverStatusModal = document.getElementById("serverStatusModal");
-    const closeServer = document.querySelector(".close-server");
-
-    openServerStatus.addEventListener("click", function(event) {
-        event.preventDefault();
-        serverStatusModal.style.display = "flex";
-    });
-
-    closeServer.addEventListener("click", function() {
-        serverStatusModal.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === serverStatusModal) {
-            serverStatusModal.style.display = "none";
-        }
-    });
-</script>
 
     <!-- Main Content -->
     <div class="content">
