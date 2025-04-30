@@ -671,6 +671,7 @@ body{
     <li><a href="#" id="openAttendance"><i class='bx bx-group'></i> Attendance</a></li>
       <li><a href="#" id="openOurDoc"><i class='bx bx-cloud'></i>OurDoc Cloud Store</a></li>
   <li><a href="#" id="openEdusphereEnv"><i class='bx bx-analyse'></i> Edusphere-Env</a></li>
+  <li><a href="#" id="openDailyLog"><i class='bx bx-message-square-dots'></i> Daily Log</a></li>
   <li><a href="#" id="openStaffLogin"><i class='bx bx-message-square-dots'></i> Staff Login</a></li>
   <li><a href="#" id="openvirtualzone"><i class='bx bx-analyse'></i> Virtul Zone</a></li>
   <li><a href="#" id="openServerStatus"><i class='bx bx-server'></i> Server</a></li>
@@ -705,6 +706,11 @@ document.getElementById("openOurDoc").addEventListener("click", function (e) {
   document.getElementById("openEdusphereEnv").addEventListener("click", function (e) {
     e.preventDefault();
     openPopup("https://sugamkaistha1224.github.io/edusphere-enviroments-app/", "EdusphereEnv");
+  });
+
+document.getElementById("openDailyLog").addEventListener("click", function (e) {
+    e.preventDefault();
+    openPopup("https://sugamkaistha1224.github.io/Testing/", "DailyLog");
   });
 
   document.getElementById("openStaffLogin").addEventListener("click", function (e) {
@@ -1065,13 +1071,13 @@ function highlightText() {
     <div class="orders">
         <div class="header">
             <i class='bx bx-receipt'></i>
-            <h3>Reminder Log Book</h3>
+            <h3>Calender </h3>
             <i class='bx bx-filter'></i>
             <i class='bx bx-search'></i>
         </div>
 
         <div class="iframe-container">
-            <iframe src="https://sugamkaistha1224.github.io/Testing/" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://sugamkaistha1224.github.io/calender/" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 </div>
